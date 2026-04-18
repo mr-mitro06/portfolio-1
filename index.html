@@ -3,15 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhinav Das | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Abhinav Das | Creative Builder</title>
+    <!-- Using Outfit font for a modern, geometric tech feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent-1: #00f0ff; /* Vibrant Cyan */
+            --accent-2: #ff007f; /* Vibrant Pink */
+            --accent-3: #7000ff; /* Deep Purple */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background Orbs */
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: #050505;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out alternate;
+            transition: transform 0.2s ease-out;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-1);
+            top: -10%;
+            left: -10%;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-3);
+            bottom: -20%;
+            right: -10%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-2);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 15s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.2); }
+        }
+
+        /* Glassmorphism Utility Class */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+        }
+
+        /* Typography Gradients */
+        .text-gradient {
+            background: linear-gradient(to right, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-alt {
+            background: linear-gradient(to right, var(--accent-2), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-1);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: all 0.3s;
+        }
+
+        /* Layout */
+        section {
+            min-height: 100vh;
+            padding: 120px 20px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        #hero {
+            text-align: left;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 50px;
+        }
+
+        .greeting {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--accent-1);
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            height: 40px;
+        }
+
+        .hero-details {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .hero-details span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--accent-1), var(--accent-3));
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(112, 0, 255, 0.4);
+        }
+
+        /* About Section */
+        .about-card {
+            padding: 50px;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #d1d5db;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill-tag {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-1);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-2);
+            box-shadow: 0 15px 30px rgba(255, 0, 127, 0.2);
+        }
+
+        .project-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Goals Section */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .goal-item {
+            padding: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .goal-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .goal-icon {
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            margin-top: 50px;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero-subtitle { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                width: 95%;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 200px;
+                flex-direction: column;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 20px;
+                gap: 20px;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: all 0.3s;
+            }
+
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(10px);
+            }
+
+            .hero-content {
+                padding: 30px 20px;
+                text-align: center;
+            }
+
+            .hero-details {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .section-title { font-size: 2.5rem; }
+            
+            .about-card { padding: 30px 20px; font-size: 1.1rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Abhinav.dev</div>
-        <ul class="nav-links">
+    <!-- Animated Background -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="glass">
+        <div class="logo text-gradient">Abhinav.dev</div>
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links" id="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
@@ -19,83 +454,181 @@
         </ul>
     </nav>
 
-    <header id="hero">
-        <div class="hero-content fade-in">
-            <p class="greeting">Hi there, I'm</p>
-            <h1>Abhinav Das</h1>
-            <h2 id="typewriter"></h2>
-            <p class="location">📍 Kochi, Kerala, India | 19 Years Old</p>
-            <a href="#projects" class="btn">View My Work</a>
-        </div>
-    </header>
-
-    <section id="about" class="fade-in">
+    <!-- Hero Section -->
+    <section id="hero">
         <div class="container">
-            <h2>About Me</h2>
-            <div class="underline"></div>
-            <p>I am a student developer and creative builder with a passion for crafting elegant solutions. My interests span across software development, UI/UX design, Android customization, operating systems, and AI-assisted development. I love turning complex problems into beautiful, intuitive tech products.</p>
+            <div class="hero-content glass reveal">
+                <p class="greeting">Hi there, I'm</p>
+                <h1 class="hero-title text-gradient">Abhinav Das</h1>
+                <h2 class="hero-subtitle" id="typewriter"></h2>
+                
+                <div class="hero-details">
+                    <span>📍 Kochi, Kerala, India</span>
+                    <span>🎂 19 Years Old</span>
+                </div>
+                
+                <a href="#projects" class="btn">Explore My Work</a>
+            </div>
         </div>
     </section>
 
-    <section id="skills" class="fade-in">
+    <!-- About Section -->
+    <section id="about">
         <div class="container">
-            <h2>Skills & Interests</h2>
-            <div class="underline"></div>
+            <h2 class="section-title text-gradient-alt reveal">About Me</h2>
+            <div class="about-card glass reveal">
+                <p>I am a student developer and creative builder with a passion for crafting elegant solutions. My interests span across <strong>software development, UI/UX design, Android customization, operating systems,</strong> and <strong>AI-assisted development</strong>. I love turning complex problems into beautiful, intuitive, and highly functional tech products.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title text-gradient reveal">Skills & Arsenal</h2>
             <div class="skills-grid">
-                <div class="skill-tag">Web Development</div>
-                <div class="skill-tag">UI/UX Design</div>
-                <div class="skill-tag">Android Customization</div>
-                <div class="skill-tag">OS Development</div>
-                <div class="skill-tag">GitHub & Version Control</div>
-                <div class="skill-tag">AI-Assisted Dev</div>
-                <div class="skill-tag">Graphic Design</div>
-                <div class="skill-tag">Creative Problem Solving</div>
+                <div class="skill-tag glass reveal">Web Development</div>
+                <div class="skill-tag glass reveal">UI/UX Design</div>
+                <div class="skill-tag glass reveal">Android Customization</div>
+                <div class="skill-tag glass reveal">OS Development</div>
+                <div class="skill-tag glass reveal">GitHub & Version Control</div>
+                <div class="skill-tag glass reveal">AI-Assisted Dev</div>
+                <div class="skill-tag glass reveal">Graphic Design</div>
+                <div class="skill-tag glass reveal">Creative Problem Solving</div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="fade-in">
+    <!-- Projects Section -->
+    <section id="projects">
         <div class="container">
-            <h2>Featured Projects</h2>
-            <div class="underline"></div>
+            <h2 class="section-title text-gradient-alt reveal">Featured Projects</h2>
             <div class="project-grid">
-                <div class="project-card">
-                    <h3>FRISP_OS</h3>
-                    <p>An educational operating system project built from the ground up to understand deep OS level concepts.</p>
+                <div class="project-card glass reveal">
+                    <h3 class="text-gradient">FRISP_OS</h3>
+                    <p>An educational operating system project built from the ground up to deeply understand core OS level concepts and architecture.</p>
                 </div>
-                <div class="project-card">
-                    <h3>EdLance</h3>
-                    <p>A dedicated freelancing platform designed specifically to help college students find gig work and build their portfolios.</p>
+                <div class="project-card glass reveal">
+                    <h3 class="text-gradient">EdLance</h3>
+                    <p>A dedicated freelancing platform designed specifically to help college students find gig work, collaborate, and build their portfolios.</p>
                 </div>
-                <div class="project-card">
-                    <h3>FryLabs Studio</h3>
-                    <p>A creative studio serving as the central hub for my mobile apps, software, and tech projects.</p>
+                <div class="project-card glass reveal">
+                    <h3 class="text-gradient">FryLabs Studio</h3>
+                    <p>A creative studio serving as the central hub and launchpad for my mobile apps, software utilities, and tech experiments.</p>
                 </div>
-                <div class="project-card">
-                    <h3>Zyphix Studios</h3>
-                    <p>A graphic design project focusing on visual identity, modern UI/UX principles, and aesthetics.</p>
+                <div class="project-card glass reveal">
+                    <h3 class="text-gradient">Zyphix Studios</h3>
+                    <p>A graphic design project focusing on visual identity, modern UI/UX principles, aesthetics, and branding for digital products.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="goals" class="fade-in">
+    <!-- Goals Section -->
+    <section id="goals">
         <div class="container">
-            <h2>Future Goals</h2>
-            <div class="underline"></div>
-            <ul class="goals-list">
-                <li>🚀 Build a complete, feature-rich educational operating system.</li>
-                <li>📈 Grow FryLabs Studio into a recognized tech development hub.</li>
-                <li>🧠 Continuously improve skills in development, UI/UX design, and AI.</li>
-                <li>💡 Create impactful tech products and launch successful startups.</li>
-            </ul>
+            <h2 class="section-title text-gradient reveal">Future Directives</h2>
+            <div class="goals-grid">
+                <div class="goal-item glass reveal">
+                    <span class="goal-icon">🚀</span>
+                    <p>Build a complete, feature-rich educational operating system.</p>
+                </div>
+                <div class="goal-item glass reveal">
+                    <span class="goal-icon">📈</span>
+                    <p>Grow FryLabs Studio into a recognized tech development hub.</p>
+                </div>
+                <div class="goal-item glass reveal">
+                    <span class="goal-icon">🧠</span>
+                    <p>Continuously improve skills in development, UI/UX, and AI.</p>
+                </div>
+                <div class="goal-item glass reveal">
+                    <span class="goal-icon">💡</span>
+                    <p>Create impactful tech products and launch successful startups.</p>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Abhinav Das. Built with passion in Kochi.</p>
+        <p>&copy; 2026 Abhinav Das. Built with passion & glassmorphism in Kochi.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // --- 1. Typewriter Effect ---
+        const titles = ["Student Developer.", "UI/UX Designer.", "OS Enthusiast.", "Creative Builder."];
+        const typeWriterElement = document.getElementById("typewriter");
+        let titleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentTitle = titles[titleIndex];
+            
+            if (isDeleting) {
+                typeWriterElement.textContent = currentTitle.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeWriterElement.textContent = currentTitle.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 100;
+
+            if (!isDeleting && charIndex === currentTitle.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                titleIndex = (titleIndex + 1) % titles.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+        
+        typeWriter();
+
+        // --- 2. Scroll Reveal Animation ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+
+        // --- 3. Mobile Menu Toggle ---
+        const hamburger = document.getElementById("hamburger");
+        const navLinks = document.getElementById("nav-links");
+
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+            });
+        });
+
+        // --- 4. Interactive Background Orbs (Parallax Effect) ---
+        document.addEventListener("mousemove", (e) => {
+            const orbs = document.querySelectorAll('.orb');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            orbs[0].style.transform = `translate(${x * 30}px, ${y * 30}px)`;
+            orbs[1].style.transform = `translate(-${x * 40}px, -${y * 40}px)`;
+            orbs[2].style.transform = `translate(${x * 20 - 50}%, ${y * 20 - 50}%)`;
+        });
+    </script>
 </body>
 </html>
